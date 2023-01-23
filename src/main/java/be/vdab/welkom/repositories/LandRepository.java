@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class LandRepository {
     public LandRepository() {
-        System.out.println("Constructor");
+        System.out.println("Constructor...");
     }
 
     public List<Land> findAll() {
