@@ -13,9 +13,6 @@ import java.util.List;
 
 @Component
 public class LandRepository {
-    public LandRepository() {
-        System.out.println("Constructor...");
-    }
 
     public List<Land> findAll() {
         try (
@@ -33,6 +30,5 @@ public class LandRepository {
         } catch (IOException | ArrayIndexOutOfBoundsException | NumberFormatException e){
             throw new RepositoryException(e);
         }
-
     }
 }
