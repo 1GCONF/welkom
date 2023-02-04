@@ -1,8 +1,8 @@
 package be.vdab.welkom.repositories;
-
 import be.vdab.welkom.domain.Taal;
 import be.vdab.welkom.exceptions.RepositoryException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.xml.stream.XMLInputFactory;
@@ -14,14 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 @Component
 @Qualifier("XML")
-public class XmlTaalRepository implements TaalRepository{
+public class XmlTaalRepository implements TaalRepository {
+    private final String pad;
+    public XmlTaalRepository(@Value("${talenXmlPad}") String pad) {
+        this.pad = pad;
+    }
     private final XMLInputFactory factory = XMLInputFactory.newInstance();
-
     @Override
     public List<Taal> findAll() {
         var talen = new ArrayList<Taal>();
-        try (var bufferedReader =
-                     Files.newBufferedReader(Path.of("/data/talen.xml"))) {
+        try (
+                var bufferedReader = Files.newBufferedReader(Path.of("/data/talen.xml)"))
+        ) {
             var reader = factory.createXMLStreamReader(bufferedReader);
             while (reader.hasNext()) {
                 reader.next();
